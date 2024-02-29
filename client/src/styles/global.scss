@@ -1,0 +1,52 @@
+@import './settings.scss';
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(147,185,255);
+  font-family: $font-text;
+  font-size: ($base-size * 1.1);
+  color: $text-color-dark;
+  letter-spacing: 0.5px;
+}
+
+:global(.container) {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@import "./typography.scss";
+
+.fadeIn {
+  width: 100%;
+  animation: 0.5s fadeIn forwards;
+}
+
+.fadeOut {
+  width: 100%;
+  animation: 0.5s fadeOut forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
