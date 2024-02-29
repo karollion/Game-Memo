@@ -3,7 +3,7 @@ import React from 'react';
 
 const Scores: React.FC = () : JSX.Element => {
     return (
-        <div>
+        <div className={styles.root}>
             <h1>Scores</h1>
         </div>
     );
