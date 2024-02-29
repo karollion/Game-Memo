@@ -2,6 +2,7 @@ import React from 'react';
 // import { Routes, Route, useLocation } from 'react-router-dom';
 
 // import Components
+import Menu from './components/views/Menu/Menu';
 import Home from './components/pages/Home/Home';
 import Game from './components/pages/Game/Game';
 import Scores from './components/pages/Scores/Scores';
@@ -11,7 +12,7 @@ import Footer from './components/views/Footer/Footer';
 function App() {
   return (
     <div className="App">
-      bla bla bla
+      <Menu />
       <Home />
       <Game />
       <Scores />
