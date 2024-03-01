@@ -1,6 +1,8 @@
-import MenuButton from '../../common/MenuButton/MenuButton';
 import styles from './Scores.module.scss';
 import React from 'react';
+
+//import components
+import MenuButton from '../../common/MenuButton/MenuButton';
 
 const Scores: React.FC = () : JSX.Element => {
     return (

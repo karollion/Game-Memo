@@ -1,6 +1,8 @@
-import MenuButton from '../../common/MenuButton/MenuButton';
 import styles from './Instruction.module.scss';
 import React from 'react';
+
+//import components
+import MenuButton from '../../common/MenuButton/MenuButton';
 
 const Instruction: React.FC = () : JSX.Element => {
     return (
