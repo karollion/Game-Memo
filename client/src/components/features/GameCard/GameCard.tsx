@@ -11,10 +11,10 @@ const GameCard: React.FC<GameCardProps> = ({ children }) : JSX.Element => {
     }
 
     return (
-        <button 
-            className={styles.button}
+        <div 
+            className={styles.root}
             onClick={handleClick}
-        ></button>
+        ></div>
     );
 }
 
