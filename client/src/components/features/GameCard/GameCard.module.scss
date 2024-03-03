@@ -1,17 +1,19 @@
 
 .root {
-  width: 100px;
-  height: 100px;
 
   .front {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background: #801e1e;
+    margin: 20px auto;
+    border-radius: 10px;
   }
 
   .back {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background: #301e80;
+    margin: 20px auto;
+    border-radius: 10px;
   }
 }

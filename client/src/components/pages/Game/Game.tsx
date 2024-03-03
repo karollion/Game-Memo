@@ -2,15 +2,15 @@ import styles from './Game.module.scss';
 import React from 'react';
 
 // import components
-import MenuButton from '../../common/MenuButton/MenuButton';
-import GameCard from '../../features/GameCard/GameCard';
+import Board from '../../features/Board/Board';
+import Container from '../../common/Container/Container';
 
 const Game: React.FC = () : JSX.Element => {
     return (
         <div className={styles.root}>
-            <h1>Game</h1>
-            <MenuButton nav={''}>Back</MenuButton>
-            <GameCard />
+            <Container>
+                <Board />
+            </Container>
         </div>
     );
 }
