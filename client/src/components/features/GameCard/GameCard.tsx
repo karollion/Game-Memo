@@ -1,7 +1,6 @@
 import styles from './GameCard.module.scss';
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { IMGS_URL } from '../../../config';
 
 interface GameCardProps {
     children?: any;

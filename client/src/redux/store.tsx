@@ -1,9 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import cardsReducer from './cardsRedux';
 
-export const store = configureStore({
-    reducer: {
-      
-    }
-})
+const store = configureStore({
+  reducer: {
+    cards: cardsReducer,
+  },
+  devTools: process.env.NODE_ENV !== 'production',
+});
 
-export type RootState = ReturnType<typeof store.getState>
+export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
