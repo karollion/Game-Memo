@@ -1,12 +1,14 @@
 import styles from './GameCard.module.scss';
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
+import { IMGS_URL } from '../../../config';
 
 interface GameCardProps {
     children?: any;
+    frontImage: string;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ children }) : JSX.Element => {
+const GameCard: React.FC<GameCardProps> = ({ frontImage, children }) : JSX.Element => {
   const [isFlipped, setIsFlipped] = useState(true);
 
   const handleClick = ( e: any ) => {
@@ -18,7 +20,11 @@ const GameCard: React.FC<GameCardProps> = ({ children }) : JSX.Element => {
     <div className={styles.root} >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className={styles.front} onClick={handleClick}>
-          
+        <img 
+          className={styles.image}
+          alt={frontImage}
+          src={'images/cards/' + frontImage + ".png"} 
+        />
         </div>
 
         <div className={styles.back} onClick={handleClick}>
