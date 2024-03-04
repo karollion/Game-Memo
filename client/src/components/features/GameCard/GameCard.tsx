@@ -8,7 +8,7 @@ interface GameCardProps {
 }
 
 const GameCard: React.FC<GameCardProps> = ({ frontImage, children }) : JSX.Element => {
-  const [isFlipped, setIsFlipped] = useState(true);
+  const [isFlipped, setIsFlipped] = useState<boolean>(true);
 
   const handleClick = ( e: any ) => {
     e.preventDefault();

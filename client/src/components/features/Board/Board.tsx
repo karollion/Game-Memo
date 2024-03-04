@@ -1,5 +1,5 @@
 import styles from './Board.module.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import GameCard from '../GameCard/GameCard';
 
 interface BoardProps {
@@ -7,8 +7,31 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
+  const [firstCard, setFirstCard] = useState<string>('');
+  const [secondCard, setSecondCard] = useState<string>('');
 
   let frontImages: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '0', '1', '2', '3', '4', '5', '6', '7'];
+
+  let guessedCards: string[] = [];
+
+  const compareCards = ( card : string ) => {
+    if (firstCard === '') {
+      setFirstCard(card);
+    } else {
+      setSecondCard(card);
+    }
+
+    if (firstCard === secondCard && firstCard !== '' && secondCard !== '') {
+      guessedCards.push(firstCard);
+      guessedCards.push(secondCard);
+    } else if (firstCard !== secondCard && firstCard !== '' && secondCard !== '') {
+      //zakryc spowrotem karty
+    }
+
+    if (guessedCards.length === 16) {
+      console.log('Wygrana')
+    }
+  }
 
   return (
     <div className={styles.root} >
