@@ -1,28 +1,34 @@
 import styles from './GameCard.module.scss';
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
+import { Card, editCard } from '../../../redux/cardsRedux';
+import { useDispatch } from 'react-redux';
 
 interface GameCardProps {
     children?: any;
-    frontImage: string;
+    card: Card;
+    action: (card : Card) => void;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ frontImage, children }) : JSX.Element => {
-  const [isFlipped, setIsFlipped] = useState<boolean>(true);
+const GameCard: React.FC<GameCardProps> = ({ card, action, children }) : JSX.Element => {
+  const dispatch = useDispatch();
+  //const [isFlipped, setIsFlipped] = useState<boolean>(true);
 
   const handleClick = ( e: any ) => {
     e.preventDefault();
-    setIsFlipped(!isFlipped)
+    dispatch(editCard({ ...card, isFlipped: !card.isFlipped }));
+    //setIsFlipped(!isFlipped)
+    action(card);
   }
 
   return (
     <div className={styles.root} >
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+      <ReactCardFlip isFlipped={card.isFlipped} flipDirection="vertical">
         <div className={styles.front} onClick={handleClick}>
         <img 
           className={styles.image}
-          alt={frontImage}
-          src={'images/cards/' + frontImage + ".png"} 
+          alt={card.name}
+          src={'images/cards/' + card.image + ".png"} 
         />
         </div>
 

@@ -1,65 +1,69 @@
 import styles from './Board.module.scss';
 import React, { useState } from 'react';
 import GameCard from '../GameCard/GameCard';
+import { useSelector } from 'react-redux';
+import { selectShuffledCards } from '../../../redux/cardsRedux';
+import { Card } from '../../../redux/cardsRedux';
+import { useDispatch } from 'react-redux';
 
 interface BoardProps {
     children?: any;
 }
 
 const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
-  const [firstCard, setFirstCard] = useState<string>('');
-  const [secondCard, setSecondCard] = useState<string>('');
+  const dispatch = useDispatch();
+  const [firstCard, setFirstCard] = useState<Card | undefined>(undefined);
+  const [secondCard, setSecondCard] = useState<Card | undefined>(undefined);
+  const [guessedCards, setGuessedCards] = useState<Card[] >([]);
 
-  let frontImages: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '0', '1', '2', '3', '4', '5', '6', '7'];
+  const cards = useSelector(selectShuffledCards);  
 
-  let guessedCards: string[] = [];
-
-  const compareCards = ( card : string ) => {
-    if (firstCard === '') {
+  const addCards = ( card : Card ) => {
+    if (!firstCard) {
       setFirstCard(card);
     } else {
       setSecondCard(card);
     }
+  }
 
-    if (firstCard === secondCard && firstCard !== '' && secondCard !== '') {
-      guessedCards.push(firstCard);
-      guessedCards.push(secondCard);
-    } else if (firstCard !== secondCard && firstCard !== '' && secondCard !== '') {
-      //zakryc spowrotem karty
-    }
-
+  const compareCards = (  ) => {
+    if ( firstCard && secondCard ) {
+      if (firstCard.image === secondCard.image) {
+        console.log('Takie same' , firstCard , secondCard)
+        setGuessedCards((cards) => [...cards, firstCard, secondCard]); 
+        setFirstCard(undefined);
+        setSecondCard(undefined);
+      } else {
+        console.log('Zakryć: ' , firstCard , secondCard);
+        setFirstCard(undefined);
+        setSecondCard(undefined);
+      }
+    } 
+    
     if (guessedCards.length === 16) {
       console.log('Wygrana')
     }
   }
+  
+  compareCards();
+  
+  console.log('firstCard', firstCard)
+  console.log('secondCard', secondCard)
+  // console.log('cards', cards)
+  console.log('guessedCards', guessedCards)
 
   return (
-    <div className={styles.root} >
-      <div className='row'>
-        <div className='col'><GameCard frontImage={frontImages[0]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[1]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[2]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[3]} /></div>
+    <div className={styles.root}>
+    {[0, 1, 2, 3].map((row) => (
+      <div key={row} className="row">
+        {[0, 1, 2, 3].map((col) => (
+          <div key={col} className="col">
+            <GameCard card={cards[row * 4 + col]} action={addCards} />
+          </div>
+        ))}
       </div>
-      <div className='row'>
-        <div className='col'><GameCard frontImage={frontImages[4]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[5]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[6]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[7]} /></div>
-      </div>
-      <div className='row'>
-        <div className='col'><GameCard frontImage={frontImages[8]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[9]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[10]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[11]} /></div>
-      </div>
-      <div className='row'>
-        <div className='col'><GameCard frontImage={frontImages[12]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[13]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[14]} /></div>
-        <div className='col'><GameCard frontImage={frontImages[15]} /></div>
-      </div>
-    </div>
+    ))}
+  </div>
   );
 }
 
