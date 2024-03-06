@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { editCard, selectAllCards, shuffleCards } from '../../../redux/cardsRedux';
 import { Card } from '../../../redux/cardsRedux';
 import { useDispatch } from 'react-redux';
+import Victory from '../../common/Victory/Victory';
 
 interface BoardProps {
     children?: any;
@@ -64,7 +65,7 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
 
   return (
     <div className={styles.root}>
-    {[...Array(numRows)].map((_, row) => (
+      {[...Array(numRows)].map((_, row) => (
         <div key={row} className="row">
           {[...Array(numCols)].map((_, col) => (
             <div key={col} className="col">
@@ -73,6 +74,7 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
           ))}
         </div>
       ))}
+      <Victory />
   </div>
   );
 }
