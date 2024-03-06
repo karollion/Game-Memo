@@ -2,6 +2,7 @@
 .root {
 
   .front {
+    position: relative;
     width: 200px;
     height: 200px;
     background: #801e1e;
@@ -12,6 +13,16 @@
       width: 100%;
       height: 100%;
       border-radius: 10px;
+    }
+
+    .btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background-color: chartreuse;
+      border: none;
     }
   }
 

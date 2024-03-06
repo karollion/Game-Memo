@@ -1,5 +1,5 @@
 import styles from './GameCard.module.scss';
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { Card, editCard } from '../../../redux/cardsRedux';
 import { useDispatch } from 'react-redux';
@@ -14,8 +14,8 @@ const GameCard: React.FC<GameCardProps> = ({ card, action, children }) : JSX.Ele
   const dispatch = useDispatch();
   //const [isFlipped, setIsFlipped] = useState<boolean>(true);
 
-  const handleClick = ( e: any ) => {
-    e.preventDefault();
+  const handleClick = (  ) => {
+    
     dispatch(editCard({ ...card, isFlipped: !card.isFlipped }));
     //setIsFlipped(!isFlipped)
     action(card);
