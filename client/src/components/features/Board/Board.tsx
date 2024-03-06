@@ -12,7 +12,7 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
   const dispatch = useDispatch();
-  //const [lockClick, setLockClick] = useState<boolean>(false);
+  const [lockClick, setLockClick] = useState<boolean>(false);
   const [firstCard, setFirstCard] = useState<Card | undefined>(undefined);
   const [secondCard, setSecondCard] = useState<Card | undefined>(undefined);
   const [guessedCards, setGuessedCards] = useState<Card[] >([]);
@@ -55,7 +55,11 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
   }, [dispatch]);
   
   useEffect(() => {
-    compareCards();
+    setLockClick(true);
+    setTimeout(() => {
+      compareCards();
+      setLockClick(false);
+    }, 600);
   }, [firstCard, secondCard, guessedCards]); // eslint-disable-line
 
   return (
@@ -64,7 +68,7 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
         <div key={row} className="row">
           {[...Array(numCols)].map((_, col) => (
             <div key={col} className="col">
-              <GameCard card={cards[row * numCols + col]} action={addCards} />
+              <GameCard card={cards[row * numCols + col]} action={addCards} lockClick={lockClick}/>
             </div>
           ))}
         </div>

@@ -6,13 +6,14 @@ import { Card } from '../../../redux/cardsRedux';
 interface GameCardProps {
     children?: any;
     card: Card;
+    lockClick: boolean;
     action: (card : Card) => void;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ card, action, children }) : JSX.Element => {
+const GameCard: React.FC<GameCardProps> = ({ card, lockClick, action, children }) : JSX.Element => {
 
   const handleClick = (  ) => {
-    action(card);
+    if (!lockClick) action(card);
   }
 
   return (
