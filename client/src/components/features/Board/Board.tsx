@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import { editCard, selectAllCards, shuffleCards } from '../../../redux/cardsRedux';
 import { Card } from '../../../redux/cardsRedux';
 import { useDispatch } from 'react-redux';
-import Victory from '../../common/Victory/Victory';
 
 interface BoardProps {
     children?: any;
+    finishGame: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
+const Board: React.FC<BoardProps> = ({ finishGame, children }) : JSX.Element => {
   const dispatch = useDispatch();
   const [lockClick, setLockClick] = useState<boolean>(false);
   const [firstCard, setFirstCard] = useState<Card | undefined>(undefined);
@@ -55,7 +55,7 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
     } 
     
     if (guessedCards.length === 16) {
-      console.log('Wygrana')
+      finishGame();
     }
   }
   
@@ -84,7 +84,6 @@ const Board: React.FC<BoardProps> = ({ children }) : JSX.Element => {
           ))}
         </div>
       ))}
-      <Victory />
   </div>
   );
 }
