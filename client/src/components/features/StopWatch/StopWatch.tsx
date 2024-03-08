@@ -1,36 +1,49 @@
 import styles from './StopWatch.module.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle } from 'react';
 import convertMsToTime from '../../../utils/convertMsToTime';
 
 interface StopWatchProps {
-  action: ( time : string ) => void;
+  action: (time: string) => void;
 }
-const StopWatch: React.FC<StopWatchProps> = ({ action }) : JSX.Element => {
+
+export interface StopWatchRef {
+  startTimer: () => void;
+  stopTimer: () => void;
+  resetTimer: () => void;
+}
+
+const StopWatch: React.ForwardRefRenderFunction<StopWatchRef, StopWatchProps> = ({ action }, ref) : JSX.Element => {
   const [time, setTime] = useState<number>(0);
-  const [timer, setTimer] = useState<any>(null);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    startTimer: startTimer,
+    stopTimer: stopTimer,
+    resetTimer: resetTimer,
+  }));
 
   const startTimer = () => {
-    if(timer == null){
+    if (timer == null) {
       setTimer(setInterval(() => {
-        setTime(time => time + 1);
-      }, 1));
+        setTime(time => time + 10);
+      }, 10) as NodeJS.Timeout);
     }
   };
 
   const stopTimer = () => {
-    clearInterval(timer);
+    clearInterval(timer!);
     setTimer(null);
   };
-  
+
   const resetTimer = () => {
     setTime(0);
   };
-  
+
   useEffect(() => {
     return () => {
-      if(timer) clearInterval(timer);
+      if (timer) clearInterval(timer!);
     };
-  }, []);
+  }, [timer]);
 
   return (
     <div className={styles.root}>
@@ -39,4 +52,4 @@ const StopWatch: React.FC<StopWatchProps> = ({ action }) : JSX.Element => {
   );
 }
 
-export default StopWatch;
+export default React.forwardRef(StopWatch);
