@@ -13,9 +13,11 @@ const Game: React.FC = () : JSX.Element => {
   const navigate = useNavigate();
   const timeRef = useRef<StopWatchRef>(null);
   const [finish, setFinish] = useState<boolean>(false);
+  const [finishTime, setFinishTime] = useState<string>('');
 
   const finishGame = (): void => {
     setFinish(true);
+    stopStopWatch();
   };
 
   const quitGame = (): void => {
@@ -23,7 +25,7 @@ const Game: React.FC = () : JSX.Element => {
   }
 
   const time = (time : string): void => {
-    console.log(time)
+    setFinishTime(time);
   }
 
   const startStopWatch = (): void => {
@@ -51,9 +53,9 @@ const Game: React.FC = () : JSX.Element => {
       <button onClick={startStopWatch}>Start</button>
       <button onClick={stopStopWatch}>Stop</button>
       <button onClick={resetStopWatch}>Reset</button>
-        <Board finishGame={finishGame} />
+        <Board finishGame={finishGame} startStopWatch={startStopWatch}/>
       </Container>
-      {finish && <Victory action={quitGame} />}
+      {finish && <Victory action={quitGame} finishTime={finishTime} />}
     </div>
   );
 };

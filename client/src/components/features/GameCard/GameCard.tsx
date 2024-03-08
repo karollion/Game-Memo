@@ -8,12 +8,16 @@ interface GameCardProps {
     card: Card;
     lockClick: boolean;
     action: (card : Card) => void;
+    startStopWatch: () => void;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ card, lockClick, action, children }) : JSX.Element => {
+const GameCard: React.FC<GameCardProps> = ({ card, lockClick, action, startStopWatch, children }) : JSX.Element => {
 
   const handleClick = (  ) => {
-    if (!lockClick) action(card);
+    if (!lockClick) {
+      action(card);
+      startStopWatch();
+    }
   }
 
   return (

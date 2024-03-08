@@ -45,6 +45,8 @@ const StopWatch: React.ForwardRefRenderFunction<StopWatchRef, StopWatchProps> = 
     };
   }, [timer]);
 
+  action(convertMsToTime(time));
+
   return (
     <div className={styles.root}>
       <span className={styles.timer}>{convertMsToTime(time)}</span>

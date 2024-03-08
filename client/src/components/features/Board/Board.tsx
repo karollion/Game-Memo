@@ -12,9 +12,10 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 interface BoardProps {
     children?: any;
     finishGame: () => void;
+    startStopWatch: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ finishGame, children }) : JSX.Element => {
+const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch, children }) : JSX.Element => {
   const dispatch = useDispatch();
   const [lockClick, setLockClick] = useState<boolean>(false);
   const [firstCard, setFirstCard] = useState<Card | undefined>(undefined);
@@ -82,7 +83,7 @@ const Board: React.FC<BoardProps> = ({ finishGame, children }) : JSX.Element => 
         <div key={row} className="row">
           {[...Array(numCols)].map((_, col) => (
             <div key={col} className="col">
-              <GameCard card={cards[row * numCols + col]} action={addCards} lockClick={lockClick}/>
+              <GameCard card={cards[row * numCols + col]} action={addCards} startStopWatch={startStopWatch} lockClick={lockClick}/>
             </div>
           ))}
         </div>
