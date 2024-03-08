@@ -1,10 +1,13 @@
 import styles from './Board.module.scss';
 import React, { useEffect, useState } from 'react';
-import GameCard from '../GameCard/GameCard';
 import { useSelector } from 'react-redux';
 import { editCard, selectAllCards, shuffleCards } from '../../../redux/cardsRedux';
 import { Card } from '../../../redux/cardsRedux';
 import { useDispatch } from 'react-redux';
+
+// import components
+import GameCard from '../GameCard/GameCard';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 interface BoardProps {
     children?: any;
@@ -84,6 +87,7 @@ const Board: React.FC<BoardProps> = ({ finishGame, children }) : JSX.Element => 
           ))}
         </div>
       ))}
+      <ProgressBar quantityCards={cards.length} guessedCards={guessedCards.length} />
   </div>
   );
 }
