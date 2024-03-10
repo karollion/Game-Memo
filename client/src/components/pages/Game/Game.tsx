@@ -1,14 +1,17 @@
 import styles from './Game.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { resNumberOfClicks } from '../../../redux/gameRedux';
 
 // import components
 import Board from '../../features/Board/Board';
 import Container from '../../common/Container/Container';
 import Victory from '../../features/Victory/Victory';
 import StopWatch from '../../features/StopWatch/StopWatch';
+import { useDispatch } from 'react-redux';
 
 const Game: React.FC = () : JSX.Element => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const [finish, setFinish] = useState<boolean>(false);
@@ -19,8 +22,9 @@ const Game: React.FC = () : JSX.Element => {
     setFinish(true);
     stopStopWatch();
   };
-
+  
   const quitGame = (): void => {
+    dispatch(resNumberOfClicks());
     resetStopWatch();
     navigate("/");
   }
@@ -54,9 +58,12 @@ const Game: React.FC = () : JSX.Element => {
     <div className={styles.root}>
       <StopWatch time={time} />
       <Container>
-        <Board finishGame={finishGame} startStopWatch={startStopWatch}/>
+        <Board 
+          finishGame={finishGame} 
+          startStopWatch={startStopWatch} 
+        />
       </Container>
-      {finish && <Victory action={quitGame} time={time} />}
+      {finish && <Victory action={quitGame} time={time}/>}
     </div>
   );
 };

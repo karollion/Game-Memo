@@ -4,20 +4,19 @@ import { useSelector } from 'react-redux';
 import { editCard, selectAllCards, shuffleCards } from '../../../redux/cardsRedux';
 import { Card } from '../../../redux/cardsRedux';
 import { useDispatch } from 'react-redux';
+import { incNumberOfClicks } from '../../../redux/gameRedux';
 
 // import components
 import GameCard from '../GameCard/GameCard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 interface BoardProps {
-    children?: any;
     finishGame: () => void;
     startStopWatch: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch, children }) : JSX.Element => {
+const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch }) : JSX.Element => {
   const dispatch = useDispatch();
-  const [lockClick, setLockClick] = useState<boolean>(false);
   const [firstCard, setFirstCard] = useState<Card | undefined>(undefined);
   const [secondCard, setSecondCard] = useState<Card | undefined>(undefined);
   const [guessedCards, setGuessedCards] = useState<Card[] >([]);
@@ -37,6 +36,7 @@ const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch, children }) :
       setSecondCard(card);
       dispatch(editCard({ ...card, isFlipped: !card.isFlipped }));
     }
+    dispatch(incNumberOfClicks())
   }
   
   /**
@@ -70,10 +70,8 @@ const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch, children }) :
   
   // Blocking the ability to press a card, running the compare Cards function and unlocking card clicking
   useEffect(() => {
-    setLockClick(true);
     setTimeout(() => {
       compareCards();
-      setLockClick(false);
     }, 600);
   }, [firstCard, secondCard, guessedCards]); // eslint-disable-line
 
@@ -83,7 +81,7 @@ const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch, children }) :
         <div key={row} className="row">
           {[...Array(numCols)].map((_, col) => (
             <div key={col} className="col">
-              <GameCard card={cards[row * numCols + col]} action={addCards} startStopWatch={startStopWatch} lockClick={lockClick}/>
+              <GameCard card={cards[row * numCols + col]} action={addCards} startStopWatch={startStopWatch}/>
             </div>
           ))}
         </div>
