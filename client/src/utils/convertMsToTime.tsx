@@ -12,7 +12,7 @@ function convertMsToTime(milliseconds : number): string {
   seconds = seconds % 60;
   minutes = minutes % 60;
 
-  return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(seconds,)}:${padTo2Digits(milis)}`;
+  return `${hours ? (padTo2Digits(hours) + ':'): ''}${padTo2Digits(minutes)}:${padTo2Digits(seconds,)}:${padTo2Digits(milis)}`;
 }
 
 export default convertMsToTime;
