@@ -1,7 +1,6 @@
 import styles from './Game.module.scss';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StopWatchRef } from '../../features/StopWatch/StopWatch';
 
 // import components
 import Board from '../../features/Board/Board';
@@ -11,9 +10,10 @@ import StopWatch from '../../features/StopWatch/StopWatch';
 
 const Game: React.FC = () : JSX.Element => {
   const navigate = useNavigate();
-  const timeRef = useRef<StopWatchRef>(null);
+
   const [finish, setFinish] = useState<boolean>(false);
-  const [finishTime, setFinishTime] = useState<string>('');
+  const [time, setTime] = useState<number>(0);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
   const finishGame = (): void => {
     setFinish(true);
@@ -21,41 +21,42 @@ const Game: React.FC = () : JSX.Element => {
   };
 
   const quitGame = (): void => {
+    resetStopWatch();
     navigate("/");
   }
 
-  const time = (time : string): void => {
-    setFinishTime(time);
-  }
-
-  const startStopWatch = (): void => {
-    if (timeRef.current) {
-      timeRef.current.startTimer();
+  // ---------- stopWatch functions ----------- //
+  const startStopWatch = () => {
+    if (timer == null) {
+      setTimer(setInterval(() => {
+        setTime(time => time + 10);
+      }, 10) as NodeJS.Timeout);
     }
-  }
+  };
 
-  const stopStopWatch = (): void => {
-    if (timeRef.current) {
-      timeRef.current.stopTimer();
-    }
-  }
+  const stopStopWatch = () => {
+    clearInterval(timer!);
+    setTimer(null);
+  };
 
-  const resetStopWatch = (): void => {
-    if (timeRef.current) {
-      timeRef.current.resetTimer();
-    }
-  }
+  const resetStopWatch = () => {
+    setTime(0);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timer) clearInterval(timer!);
+    };
+  }, [timer]);
+  
 
   return (
     <div className={styles.root}>
-      <StopWatch action={time} ref={timeRef}/>
+      <StopWatch time={time} />
       <Container>
-      <button onClick={startStopWatch}>Start</button>
-      <button onClick={stopStopWatch}>Stop</button>
-      <button onClick={resetStopWatch}>Reset</button>
         <Board finishGame={finishGame} startStopWatch={startStopWatch}/>
       </Container>
-      {finish && <Victory action={quitGame} finishTime={finishTime} />}
+      {finish && <Victory action={quitGame} time={time} />}
     </div>
   );
 };
