@@ -10,11 +10,11 @@ const Nav: React.FC = () : JSX.Element => {
   return (
     <div className={styles.root}>
       <nav className={styles.navigation}>
-        <button
-          className={styles.toggleBtn}
-          onClick={() => setToggleNav((prev) => !prev)}>
-          {toggleNav ? <FontAwesomeIcon  className={styles.icon} icon={faXmark} /> : <FontAwesomeIcon  className={styles.icon} icon={faBars} />}
-        </button>
+        <div className={`${styles.navicon1} ${toggleNav ? styles.open : ''}`} onClick={() => setToggleNav((prev) => !prev)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         {toggleNav ? 
           <ul>
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/">Home</NavLink>
@@ -22,6 +22,8 @@ const Nav: React.FC = () : JSX.Element => {
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/instruction">Instruction</NavLink>
             <FontAwesomeIcon  className={styles.icon} icon={faVolumeHigh} />
             <FontAwesomeIcon  className={styles.icon} icon={faVolumeXmark} />
+
+            
           </ul>
         : null}
       </nav>
