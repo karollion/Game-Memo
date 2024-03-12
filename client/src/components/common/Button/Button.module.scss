@@ -1,0 +1,16 @@
+
+.root {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background-color: gold;
+  border-radius: 50%;
+  border: 1px solid gray;
+
+  .content {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    transform: translate(-50%, -50%);
+  }
+}
