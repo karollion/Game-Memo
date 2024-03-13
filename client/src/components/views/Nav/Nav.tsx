@@ -22,8 +22,6 @@ const Nav: React.FC = () : JSX.Element => {
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/instruction">Instruction</NavLink>
             <FontAwesomeIcon  className={styles.icon} icon={faVolumeHigh} />
             <FontAwesomeIcon  className={styles.icon} icon={faVolumeXmark} />
-
-            
           </ul>
         : null}
       </nav>
