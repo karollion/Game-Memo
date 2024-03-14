@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { User } from '@prisma/client';
 
-export class CreateScoreDTO {
+export class UpdateScoreDTO {
 
   @IsNotEmpty()
   @IsInt()
