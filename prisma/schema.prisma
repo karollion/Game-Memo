@@ -23,7 +23,7 @@ model Score {
   points    Int
   cards     Int
   moves     Int
-  time      String
+  time      Int
   winAt     DateTime   @default(now())
 
   user      User       @relation(fields: [userId], references: [id])
