@@ -10,6 +10,7 @@ import configuration from './config/configuration';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { ScoresModule } from './scores/scores.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ScoresModule } from './scores/scores.module';
       load: [configuration],
       isGlobal: true,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

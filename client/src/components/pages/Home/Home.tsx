@@ -11,6 +11,7 @@ const Home: React.FC = () : JSX.Element => {
       <MenuButton nav={'game'}>Start Game</MenuButton>
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
+      <MenuButton nav={'google'}>Sign in</MenuButton>
     </div>
   );
 };
