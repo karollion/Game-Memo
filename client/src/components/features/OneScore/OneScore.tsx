@@ -1,12 +1,12 @@
-import styles from './Score.module.scss';
+import styles from './OneScore.module.scss';
 import React from 'react';
 import { Score } from '../../../redux/scoreRedux';
 
-interface ScoreProps {
+interface OneScoreProps {
   data: Score;
 }
 
-const Score: React.FC<ScoreProps> = ({ data }) : JSX.Element => {
+const OneScore: React.FC<OneScoreProps> = ({ data }) : JSX.Element => {
 
   return (
     <li className={styles.root} >
@@ -15,4 +15,4 @@ const Score: React.FC<ScoreProps> = ({ data }) : JSX.Element => {
   );
 }
 
-export default Score;
+export default OneScore;

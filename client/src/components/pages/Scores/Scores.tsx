@@ -1,17 +1,18 @@
 import styles from './Scores.module.scss';
 import React, { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 
 // import components
 import MenuButton from '../../common/MenuButton/MenuButton';
-import Score from '../../features/Score/Score';
+import OneScore from '../../features/OneScore/OneScore';
 
 // import from redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchScores, selectAllScores, selectIsLoading } from '../../../redux/scoreRedux';
 
 const Scores: React.FC = () : JSX.Element => {
-  const dispatch = useDispatch();
-  const scores = useSelector(selectAllScores);
+  const dispatch = useAppDispatch()
+  const scores = useAppSelector((state) => state.AllScores.scores);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const Scores: React.FC = () : JSX.Element => {
       ) : (
         <ul>
           {scores.map((score) => (
-            <Score key={score.id} data={score}/>
+            <OneScore key={score.id} data={score}/>
           ))}
         </ul>
       )}

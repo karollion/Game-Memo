@@ -20,7 +20,7 @@ interface User {
   score: Score[];
 }
 
-interface ScoresState {
+export interface ScoresState {
   scores: Score[];
   isLoading: boolean;
 }
@@ -39,7 +39,7 @@ export const fetchScores = createAsyncThunk(
 );
 
 const scoresSlice = createSlice({
-  name: 'scores',
+  name: 'AllScores',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -52,12 +52,11 @@ const scoresSlice = createSlice({
     });
     builder.addCase(fetchScores.rejected, (state) => {
       state.isLoading = false;
-      // Obsługa błędów
     });
   },
 });
 
-export const selectAllScores = (state: RootState) => state.scores.scores;
-export const selectIsLoading = (state: RootState) => state.scores.isLoading;
+export const selectAllScores = (state: RootState) => state.AllScores.scores;
+export const selectIsLoading = (state: RootState) => state.AllScores.isLoading;
 
 export default scoresSlice.reducer;
