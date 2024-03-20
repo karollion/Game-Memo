@@ -13,7 +13,7 @@ const Home: React.FC = () : JSX.Element => {
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
       <MenuButton nav={'auth'}>Sign in</MenuButton>
-      <a href='http://localhost:3000/auth'>sign in</a>
+      <a href='http://localhost:3030/auth'>sign in</a>
     </div>
   );
 };

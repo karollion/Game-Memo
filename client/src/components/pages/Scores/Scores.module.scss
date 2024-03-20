@@ -2,4 +2,10 @@
 .root {
     background: #31cbe6;
     min-height: 100vh;
+
+    .topTable {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 }

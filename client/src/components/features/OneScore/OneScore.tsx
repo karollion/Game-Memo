@@ -9,9 +9,17 @@ interface OneScoreProps {
 const OneScore: React.FC<OneScoreProps> = ({ data }) : JSX.Element => {
 
   return (
-    <li className={styles.root} >
-      {data.points}
-    </li>
+    <div className={styles.root} >
+      <div>
+        <img src="data.user.avatar" alt="avatar" className={styles.img}/>
+        {data.user.name}
+      </div>
+      <div>{data.cards}</div>
+      <div>{String(data.winAt)}</div>
+      <div>{data.moves}</div>
+      <div>{data.time}</div>
+      <div>{data.points}</div>
+    </div>
   );
 }
 
