@@ -29,7 +29,11 @@ const GameCard: React.FC<GameCardProps> = ({ card, action, startStopWatch, child
         </div>
 
         <div className={styles.back} onClick={handleClick}>
-          
+        <img 
+          className={styles.image}
+          alt={'card back'}
+          src={"images/cards/back.jpg"} 
+        />
         </div>
       </ReactCardFlip>
     </div>

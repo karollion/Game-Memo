@@ -1,5 +1,6 @@
 
 .root {
+  
 
   .front {
     position: relative;
@@ -9,12 +10,7 @@
     margin: 20px auto;
     border-radius: 10px;
 
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
-
+    
     .btn {
       position: absolute;
       top: 0;
@@ -25,7 +21,16 @@
       border: none;
     }
   }
-
+  
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(19, 19, 20, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(19, 19, 20, 1);
+    box-shadow: 8px 8px 24px 0px rgba(19, 19, 20, 1);
+  }
   .back {
     width: 200px;
     height: 200px;
