@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './cardsRedux';
 import gameReducer from './gameRedux';
 import scoresReducer from './scoreRedux';
-import { ScoresState } from './scoreRedux';
 
 const store = configureStore({
   reducer: {
