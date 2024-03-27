@@ -44,12 +44,19 @@ const Nav: React.FC = () : JSX.Element => {
                 <FontAwesomeIcon className={styles.icon} icon={status === 'PLAYING' ? faVolumeHigh : faVolumeXmark} />
               </button>
             </div>
+            <div className={styles.music}>
+              <p className={styles.link}>Sound:</p>
+              <button className={styles.btnMusic} onClick={togglePlayStatus}>
+                <FontAwesomeIcon className={styles.icon} icon={1 === 1 ? faVolumeHigh : faVolumeXmark} />
+              </button>
+            </div>
           </ul>
         : null}
       </nav>
       <Sound
         url={SOUNDS_URL +'simple-piano-melody-9834.mp3'}
         playStatus={status}
+        loop={true}
       />
     </div>
   );
