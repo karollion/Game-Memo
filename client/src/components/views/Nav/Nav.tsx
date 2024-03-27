@@ -5,13 +5,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 import Sound, { ReactSoundProps } from 'react-sound';
 import { SOUNDS_URL } from '../../../config';
+import { useDispatch } from 'react-redux';
+import { selectGameSoundsToggle, toggleSounds } from '../../../redux/gameRedux';
+import { useSelector } from 'react-redux';
 
 const Nav: React.FC = () : JSX.Element => {
+  const dispatch = useDispatch();
   const [toggleNav, setToggleNav] = useState<boolean>(false);
   const [status, setStatus] = useState<ReactSoundProps['playStatus']>('STOPPED');
+  const soundsToggler = useSelector(selectGameSoundsToggle);
 
-  function togglePlayStatus() {
-    setStatus(status => status === 'STOPPED' ? 'PLAYING' : 'STOPPED')
+  const togglePlayStatus = () => {
+    setStatus(status => status === 'STOPPED' ? 'PLAYING' : 'STOPPED');
+  }
+
+  const  toggleGameSounds = () => {
+    dispatch(toggleSounds());
   }
 
   // function statusLabel(status: ReactSoundProps['playStatus']): string { // eslint-disable-line
@@ -46,8 +55,8 @@ const Nav: React.FC = () : JSX.Element => {
             </div>
             <div className={styles.music}>
               <p className={styles.link}>Sound:</p>
-              <button className={styles.btnMusic} onClick={togglePlayStatus}>
-                <FontAwesomeIcon className={styles.icon} icon={1 === 1 ? faVolumeHigh : faVolumeXmark} />
+              <button className={styles.btnMusic} onClick={toggleGameSounds}>
+                <FontAwesomeIcon className={styles.icon} icon={soundsToggler ? faVolumeHigh : faVolumeXmark} />
               </button>
             </div>
           </ul>

@@ -4,6 +4,8 @@ import ReactCardFlip from 'react-card-flip';
 import { Card } from '../../../redux/cardsRedux';
 import { SOUNDS_URL } from '../../../config';
 import useSound from 'use-sound';
+import { useSelector } from 'react-redux';
+import { selectGameSoundsToggle } from '../../../redux/gameRedux';
 
 interface GameCardProps {
     children?: any;
@@ -14,10 +16,11 @@ interface GameCardProps {
 
 const GameCard: React.FC<GameCardProps> = ({ card, action, startStopWatch, children }) : JSX.Element => {
   const [play] = useSound(SOUNDS_URL +'turn.mp3');
+  const soundsToggler = useSelector(selectGameSoundsToggle);
 
   const handleClick = (  ) => {
     action(card);
-    play();
+    if (soundsToggler) play();
     startStopWatch();
   }
 
