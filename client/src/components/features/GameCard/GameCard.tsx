@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { Card } from '../../../redux/cardsRedux';
 import { SOUNDS_URL } from '../../../config';
-import Sound, { ReactSoundProps } from 'react-sound';
+import useSound from 'use-sound';
 
 interface GameCardProps {
     children?: any;
@@ -13,15 +13,11 @@ interface GameCardProps {
 }
 
 const GameCard: React.FC<GameCardProps> = ({ card, action, startStopWatch, children }) : JSX.Element => {
-  const [status, setStatus] = useState<ReactSoundProps['playStatus']>('STOPPED');
-
-  function togglePlayStatus() {
-    setStatus(status => status === 'STOPPED' ? 'PLAYING' : 'STOPPED')
-  }
+  const [play] = useSound(SOUNDS_URL +'turn.mp3');
 
   const handleClick = (  ) => {
     action(card);
-    togglePlayStatus();
+    play();
     startStopWatch();
   }
 
@@ -44,11 +40,6 @@ const GameCard: React.FC<GameCardProps> = ({ card, action, startStopWatch, child
         />
         </div>
       </ReactCardFlip>
-      <Sound
-        url={SOUNDS_URL +'turn.mp3'}
-        playStatus={status}
-        loop={false}
-      />
     </div>
   );
 }

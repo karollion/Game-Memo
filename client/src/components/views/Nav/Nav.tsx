@@ -14,16 +14,16 @@ const Nav: React.FC = () : JSX.Element => {
     setStatus(status => status === 'STOPPED' ? 'PLAYING' : 'STOPPED')
   }
 
-  function statusLabel(status: ReactSoundProps['playStatus']): string { // eslint-disable-line
-    switch(status) {
-      case 'STOPPED':
-        return 'PLAY';
-      case 'PLAYING':
-        return 'STOP';
-      default:
-        return 'STOP';
-    }
-  }
+  // function statusLabel(status: ReactSoundProps['playStatus']): string { // eslint-disable-line
+  //   switch(status) {
+  //     case 'STOPPED':
+  //       return 'PLAY';
+  //     case 'PLAYING':
+  //       return 'STOP';
+  //     default:
+  //       return 'STOP';
+  //   }
+  // }
 
   return (
     <div className={styles.root}>
