@@ -14,7 +14,7 @@ const Nav: React.FC = () : JSX.Element => {
     setStatus(status => status === 'STOPPED' ? 'PLAYING' : 'STOPPED')
   }
 
-  function statusLabel(status: ReactSoundProps['playStatus']): string {
+  function statusLabel(status: ReactSoundProps['playStatus']): string { // eslint-disable-line
     switch(status) {
       case 'STOPPED':
         return 'PLAY';
@@ -38,16 +38,19 @@ const Nav: React.FC = () : JSX.Element => {
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/">Home</NavLink>
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/scores">Scores</NavLink>
             <NavLink onClick={() => setToggleNav((prev) => !prev)} className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/instruction">Instruction</NavLink>
-            <FontAwesomeIcon  className={styles.icon} icon={faVolumeHigh} />
-            <FontAwesomeIcon  className={styles.icon} icon={faVolumeXmark} />
-            <button onClick={(click) => togglePlayStatus()}>{statusLabel(status)}</button>
-            <Sound
-              url={SOUNDS_URL}
-              playStatus={status}
-            />
+            <div className={styles.music}>
+              <p className={styles.link}>Music:</p>
+              <button className={styles.btnMusic} onClick={togglePlayStatus}>
+                <FontAwesomeIcon className={styles.icon} icon={status === 'PLAYING' ? faVolumeHigh : faVolumeXmark} />
+              </button>
+            </div>
           </ul>
         : null}
       </nav>
+      <Sound
+        url={SOUNDS_URL +'simple-piano-melody-9834.mp3'}
+        playStatus={status}
+      />
     </div>
   );
 };

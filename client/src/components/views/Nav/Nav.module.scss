@@ -30,6 +30,23 @@
       .linkActive {
         color: antiquewhite;
       }
+
+      .music {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .btnMusic {
+          border-radius: 50%;
+          color: cadetblue;
+          background: brown; 
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+      }
     }
 
     .navicon1 {
