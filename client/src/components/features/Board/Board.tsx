@@ -77,16 +77,16 @@ const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch }) : JSX.Eleme
 
   return (
     <div className={styles.root}>
+      <ProgressBar quantityCards={cards.length} guessedCards={guessedCards.length} />
       {[...Array(numRows)].map((_, row) => (
-        <div key={row} className="row">
+        <div key={row} className={styles.row}>
           {[...Array(numCols)].map((_, col) => (
-            <div key={col} className="col">
+            <div key={col} className={styles.col}>
               <GameCard card={cards[row * numCols + col]} action={addCards} startStopWatch={startStopWatch}/>
             </div>
           ))}
         </div>
       ))}
-      <ProgressBar quantityCards={cards.length} guessedCards={guessedCards.length} />
   </div>
   );
 }

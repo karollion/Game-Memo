@@ -1,13 +1,10 @@
 
 .root {
-  
-
   .front {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    aspect-ratio: 1;
     background: #801e1e;
-    margin: 20px auto;
     border-radius: 10px;
 
     
@@ -32,10 +29,9 @@
     box-shadow: 8px 8px 24px 0px rgba(19, 19, 20, 1);
   }
   .back {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    aspect-ratio: 1;
     background: #301e80;
-    margin: 20px auto;
     border-radius: 10px;
   }
 }
