@@ -41,7 +41,6 @@ export class ScoresService {
         throw new ConflictException('Conflict');
       else throw '404 Bad request';
     }
-  
   }
 
   public async updateById(
