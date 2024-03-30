@@ -54,7 +54,7 @@ const Board = ({ finishGame, startStopWatch }) => {
             compareCards();
         }, 600);
     }, [firstCard, secondCard, guessedCards]);
-    return ((0, jsx_runtime_1.jsxs)("div", { className: Board_module_scss_1.default.root, children: [[...Array(numRows)].map((_, row) => ((0, jsx_runtime_1.jsx)("div", { className: "row", children: [...Array(numCols)].map((_, col) => ((0, jsx_runtime_1.jsx)("div", { className: "col", children: (0, jsx_runtime_1.jsx)(GameCard_1.default, { card: cards[row * numCols + col], action: addCards, startStopWatch: startStopWatch }) }, col))) }, row))), (0, jsx_runtime_1.jsx)(ProgressBar_1.default, { quantityCards: cards.length, guessedCards: guessedCards.length })] }));
+    return ((0, jsx_runtime_1.jsxs)("div", { className: Board_module_scss_1.default.root, children: [(0, jsx_runtime_1.jsx)(ProgressBar_1.default, { quantityCards: cards.length, guessedCards: guessedCards.length }), [...Array(numRows)].map((_, row) => ((0, jsx_runtime_1.jsx)("div", { className: Board_module_scss_1.default.row, children: [...Array(numCols)].map((_, col) => ((0, jsx_runtime_1.jsx)("div", { className: Board_module_scss_1.default.col, children: (0, jsx_runtime_1.jsx)(GameCard_1.default, { card: cards[row * numCols + col], action: addCards, startStopWatch: startStopWatch }) }, col))) }, row)))] }));
 };
 exports.default = Board;
 //# sourceMappingURL=Board.js.map

@@ -1,6 +1,15 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseUUIDPipe, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  NotFoundException,
+  Delete,
+  UseGuards,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDTO } from './dtos/create-user.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AdminAuthGuard } from 'src/auth/admin-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -18,8 +27,14 @@ export class UsersController {
     return user;
   }
 
-  @Post('/')
-  create(@Body() userData: CreateUserDTO) {
-    return this.usersService.create(userData);
+  @Delete('/:id')
+  @UseGuards(AdminAuthGuard)
+  @UseGuards(JwtAuthGuard)
+  public async delete(@Param('id', new ParseUUIDPipe()) id: string) {
+    if (!(await this.usersService.getById(id)))
+      throw new NotFoundException('404 User not found');
+
+    await this.usersService.deleteById(id);
+    return { success: true };
   }
 }

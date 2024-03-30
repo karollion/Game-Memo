@@ -1,57 +1,38 @@
 import {
+  Body,
   Controller,
-  Get,
-  HttpStatus,
-  Req,
-  Res,
+  Post,
   UseGuards,
+  Request,
+  Response,
+  Delete,
 } from '@nestjs/common';
-// import { Response } from 'express';
-// import { AuthService } from './auth.service';
-// import { GoogleOauthGuard } from './guards/google-oauth.guard';
+import { AuthService } from './auth.service';
+import { RegisterDTO } from './dtos/register-user-dto';
+import { LocalAuthGuard } from './local-auth.guard';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  // constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  // @Get('google')
-  // @UseGuards(GoogleOauthGuard)
-  // // eslint-disable-next-line @typescript-eslint/no-empty-function
-  // async auth() {}
+  @Post('/register')
+  create(@Body() registrationData: RegisterDTO) {
+    return this.authService.register(registrationData);
+  }
 
-  // @Get('google/callback')
-  // @UseGuards(GoogleOauthGuard)
-  // async googleAuthCallback(@Req() req, @Res() res: Response) {
-  //   const token = await this.authService.signIn(req.user);
+  @UseGuards(LocalAuthGuard)
+  @Post('/login')
+  async login(@Request() req, @Response() res) {
+    const tokens = await this.authService.createSession(req.user);
+    res.cookie('auth', tokens, { httpOnly: true });
+    res.send(req.user);
+  }
 
-  //   res.cookie('access_token', token, {
-  //     maxAge: 2592000000,
-  //     sameSite: true,
-  //     secure: false,
-  //   });
-
-  //   return res.status(HttpStatus.OK);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Delete('/logout')
+  async logout(@Response() res) {
+    res.clearCookie('auth', { httpOnly: true });
+    res.send({ message: 'success' });
+  }
 }
-
-  // @Get()
-  // @UseGuards(AuthGuard('google'))
-  // async googleAuth(@Req() req) {}
-
-  // @Get('redirect')
-  // @UseGuards(AuthGuard('google'))
-  // googleAuthRedirect(@Req() req) {
-  //   return this.authService.googleLogin(req)
-  // }
-
-  // @Get('logout')
-  // logout(@Req() req, @Res() res) {
-  //   req.logout();
-  //   res.redirect('/');
-  // }
-
-  // @Get('user')
-  // getUser(@Req() req) {
-  //   return req.user;
-  // }
-//}
