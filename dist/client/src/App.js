@@ -4,6 +4,7 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 const react_router_dom_1 = require("react-router-dom");
 const Nav_1 = require("./components/views/Nav/Nav");
+const SignUp_1 = require("./components/pages/SignUp/SignUp");
 const Home_1 = require("./components/pages/Home/Home");
 const Game_1 = require("./components/pages/Game/Game");
 const Scores_1 = require("./components/pages/Scores/Scores");
@@ -22,7 +23,7 @@ function App() {
                         setTransistionStage("fadeIn");
                         setDisplayLocation(location);
                     }
-                }, children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.Routes, { location: displayLocation, children: [(0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/", element: (0, jsx_runtime_1.jsx)(Home_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/game", element: (0, jsx_runtime_1.jsx)(Game_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/scores", element: (0, jsx_runtime_1.jsx)(Scores_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/instruction", element: (0, jsx_runtime_1.jsx)(Instruction_1.default, {}) })] }) }), (0, jsx_runtime_1.jsx)(Footer_1.default, {})] }));
+                }, children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.Routes, { location: displayLocation, children: [(0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/", element: (0, jsx_runtime_1.jsx)(Home_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/signup", element: (0, jsx_runtime_1.jsx)(SignUp_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/game", element: (0, jsx_runtime_1.jsx)(Game_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/scores", element: (0, jsx_runtime_1.jsx)(Scores_1.default, {}) }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, { path: "/instruction", element: (0, jsx_runtime_1.jsx)(Instruction_1.default, {}) })] }) }), (0, jsx_runtime_1.jsx)(Footer_1.default, {})] }));
 }
 exports.default = App;
 //# sourceMappingURL=App.js.map

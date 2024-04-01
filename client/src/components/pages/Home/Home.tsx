@@ -46,6 +46,7 @@ const Home: React.FC = () : JSX.Element => {
       <MenuButton nav={'game'}>Start Game</MenuButton>
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
+      <MenuButton nav={'signup'}>Sign up</MenuButton>
       {/* <a href='http://localhost:3000/api/auth'>login</a>
       <a href='http://localhost:3000/api/auth/logout'>logout</a>
   

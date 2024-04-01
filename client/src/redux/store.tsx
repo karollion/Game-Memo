@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './cardsRedux';
 import gameReducer from './gameRedux';
 import scoresReducer from './scoreRedux';
-import userReducer, { UserState } from './userRedux';
+import userReducer, { UserState } from './userRedux'; // eslint-disable-line
 
 const store = configureStore({
   reducer: {

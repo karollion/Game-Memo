@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 
 // import Components
 import Nav from './components/views/Nav/Nav';
+import SignUp from './components/pages/SignUp/SignUp';
 import Home from './components/pages/Home/Home';
 import Game from './components/pages/Game/Game';
 import Scores from './components/pages/Scores/Scores';
@@ -33,6 +34,7 @@ function App() {
       }}>
         <Routes  location={displayLocation}>
           <Route path="/" element={<Home/>} />
+          <Route path="/signup" element={<SignUp/>} />
           <Route path="/game" element={<Game />} />
           <Route path="/scores" element={<Scores />} />
           <Route path="/instruction" element={<Instruction />} />
