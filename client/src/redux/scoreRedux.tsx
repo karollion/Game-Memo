@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { API_URL } from '../config';
+import { User } from './userRedux';
 
 export interface Score {
   id: string;
@@ -11,13 +12,6 @@ export interface Score {
   winAt: Date;
   user: User;
   userId: string;
-}
-
-interface User {
-  id: string;
-  name: string;
-  avatar?: string;
-  score: Score[];
 }
 
 export interface ScoresState {

@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './cardsRedux';
 import gameReducer from './gameRedux';
 import scoresReducer from './scoreRedux';
+import userReducer, { UserState } from './userRedux';
 
 const store = configureStore({
   reducer: {
     cards: cardsReducer,
     game: gameReducer,
     AllScores: scoresReducer,
+    user: userReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

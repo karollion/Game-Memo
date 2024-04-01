@@ -1,4 +1,5 @@
 import { RootState } from './store';
+import { User } from './userRedux';
 export interface Score {
     id: string;
     points: number;
@@ -8,12 +9,6 @@ export interface Score {
     winAt: Date;
     user: User;
     userId: string;
-}
-interface User {
-    id: string;
-    name: string;
-    avatar?: string;
-    score: Score[];
 }
 export interface ScoresState {
     scores: Score[];
