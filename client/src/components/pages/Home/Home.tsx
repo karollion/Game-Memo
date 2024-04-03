@@ -1,44 +1,15 @@
 import styles from './Home.module.scss';
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 // import components
 import MenuButton from '../../common/MenuButton/MenuButton';
+import { selectUser } from '../../../redux/userRedux';
 
 const Home: React.FC = () : JSX.Element => { 
-  
-  // const [user, setUser] = useState<any>(null);
+  const user = useSelector(selectUser);
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await fetch('/api/auth');
-  //     await console.log(response);
-  //     const { url } = await response.json();
-  //     window.location.href = url;
-  //   } catch (error) {
-  //     console.error('Error during login:', error);
-  //   }
-  // };
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await fetch('/api/auth/logout');
-  //     setUser(null);
-  //   } catch (error) {
-  //     console.error('Error during logout:', error);
-  //   }
-  // };
-
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await fetch('/auth/user');
-  //     const userData = await response.json();
-  //     setUser(userData);
-  //   } catch (error) {
-  //     console.error('Error fetching user data:', error);
-  //   }
-  // };
-
-
+  if(user) console.log(user.name)
 
   return (
     <div className={styles.root}>
@@ -47,21 +18,8 @@ const Home: React.FC = () : JSX.Element => {
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
       <MenuButton nav={'signup'}>Sign up</MenuButton>
-      {/* <a href='http://localhost:3000/api/auth'>login</a>
-      <a href='http://localhost:3000/api/auth/logout'>logout</a>
-  
-      {user ? (
-        <div>
-          <p>User: {user.name}</p>
-          <p>Email: {user.email}</p>
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleLogout}>Logout</button>
-          <button onClick={handleLogin}>Login with Google</button>
-        </div>
-      )} */}
-
+      <MenuButton nav={'login'}>Login</MenuButton>
+      {user ? <p>Welcome  {user.name}</p> : null }
     </div>
   );
 };

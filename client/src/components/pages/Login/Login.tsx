@@ -1,55 +1,55 @@
-import styles from './SignUp.module.scss';
+import styles from './Login.module.scss';
 import React, { useState } from 'react';
 import { Alert, Form, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../config';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../../redux/userRedux';
 
 // import components
 // import MenuButton from '../../common/MenuButton/MenuButton';
 
-interface SignUpData {
-  name: string;
+interface LoginData {
   email: string;
   password: string;
-  passwordRepeat: string;
 }
 
-const SignUp: React.FC = () => {
+const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [status, setStatus] = useState<string | null>(null); // null, "success", "error", "emailError"
-  const [signUpData, setSignUpData] = useState<SignUpData>({
-    name: '',
+  const [loginData, setLoginData] = useState<LoginData>({
     email: '',
-    password: '',
-    passwordRepeat: '',
+    password: ''
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const options = {
       method: 'POST',
-      body: JSON.stringify(signUpData),
+      body: JSON.stringify(loginData),
       headers: {
         'Content-Type': 'application/json',
       },
     };
     setStatus('loading');
-    fetch(`${API_URL}/auth/register`, options)
+    fetch(`${API_URL}/auth/login`, options)
       .then(res => {
         if(res.status === 201) {
           setStatus('success');
-          setSignUpData({ name: '', email: '', password: '', passwordRepeat: '' });
-          setTimeout(() => {
-            navigate('/');
-          }, 5000);
-        } else if (res.status === 409) {
-          setStatus('emailError');
+          return res.json();
+        } else if (res.status === 400) {
+          setStatus('clientError');
         } else {
           setStatus('serverError');
         }
       })
+      .then(user => {
+        dispatch(logIn({ user }));
+        setTimeout(() => { navigate('/') }, 500);
+      })
       .catch(err => {
-        setStatus('error');
+        setStatus('serverError');
       })
   };
 
@@ -61,20 +61,21 @@ const SignUp: React.FC = () => {
           {status === 'success' && (
             <Alert variant='success'>
               <Alert.Heading>Succes!</Alert.Heading>
-              <p>You have been successfully registered! You can now log in.</p>
+              <p>You have been successfully logined in!</p>
             </Alert>
           )}
 
-          {status === 'emailError' && (
-            <Alert variant="danger">
-              <Alert.Heading>User with such email already exists</Alert.Heading>
-            </Alert>
-          )}
-
-          {status === 'error' && (
-            <Alert variant="danger">
+          {status === 'serverError' && (
+            <Alert variant='danger'>
               <Alert.Heading>Something went wrong...</Alert.Heading>
-              <p>Make sure all the fields are filled correctly and try again!</p>
+              <p>Unexpected error... Try again!</p>
+            </Alert>
+          )}
+
+          {status === 'clientError' && (
+            <Alert variant='danger'>
+              <Alert.Heading>Incorrect data</Alert.Heading>
+              <p>Login or password are incorrect...</p>
             </Alert>
           )}
 
@@ -84,26 +85,14 @@ const SignUp: React.FC = () => {
             </Spinner>
           )}
 
-          <Form.Group className='mb-3' controlId='formName'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control 
-              type='text' 
-              value={signUpData.name} 
-              placeholder='Player name'
-              onChange={(e) =>
-                setSignUpData({ ...signUpData, name: e.target.value })
-              }
-            />
-          </Form.Group>
-
           <Form.Group className='mb-3' controlId='formEmail'>
             <Form.Label>E-mail</Form.Label>
             <Form.Control 
               type='email' 
-              value={signUpData.email} 
+              value={loginData.email} 
               placeholder='example@email.com'
               onChange={(e) =>
-                setSignUpData({ ...signUpData, email: e.target.value })
+                setLoginData({ ...loginData, email: e.target.value })
               }
             />
           </Form.Group>
@@ -113,29 +102,16 @@ const SignUp: React.FC = () => {
             <Form.Control 
               type='password' 
               required
-              value={signUpData.password} 
+              value={loginData.password} 
               placeholder='******'
               onChange={(e) =>
-                setSignUpData({ ...signUpData, password: e.target.value })
-              }
-            />
-          </Form.Group>
-
-          <Form.Group className='mb-3' controlId='confirmPassword'>
-            <Form.Label>Confirm password</Form.Label>
-            <Form.Control 
-              type='password' 
-              required
-              value={signUpData.passwordRepeat} 
-              placeholder='******'
-              onChange={(e) =>
-                setSignUpData({ ...signUpData, passwordRepeat: e.target.value })
+                setLoginData({ ...loginData, password: e.target.value })
               }
             />
           </Form.Group>
 
           <div className='my-4 d-flex justify-content-center'>
-          <button  type='submit' >Sign up</button>
+          <button  type='submit' >Login</button>
           </div>
 
         </Form>
@@ -143,4 +119,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default Login;

@@ -9,6 +9,7 @@ import Game from './components/pages/Game/Game';
 import Scores from './components/pages/Scores/Scores';
 import Instruction from './components/pages/Instruction/Instruction';
 import Footer from './components/views/Footer/Footer';
+import Login from './components/pages/Login/Login';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Routes  location={displayLocation}>
           <Route path="/" element={<Home/>} />
           <Route path="/signup" element={<SignUp/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/game" element={<Game />} />
           <Route path="/scores" element={<Scores />} />
           <Route path="/instruction" element={<Instruction />} />
