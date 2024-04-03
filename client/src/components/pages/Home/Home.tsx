@@ -17,8 +17,9 @@ const Home: React.FC = () : JSX.Element => {
       <MenuButton nav={'game'}>Start Game</MenuButton>
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
-      <MenuButton nav={'signup'}>Sign up</MenuButton>
-      <MenuButton nav={'login'}>Login</MenuButton>
+      {!user ?<MenuButton nav={'signup'}>Sign up</MenuButton> : null }
+      {!user ?<MenuButton nav={'login'}>Login</MenuButton> : null }
+      {user ?<MenuButton nav={'logout'}>Logout</MenuButton> : null }
       {user ? <p>Welcome  {user.name}</p> : null }
     </div>
   );
