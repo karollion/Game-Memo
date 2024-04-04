@@ -2,4 +2,8 @@
 .root {
     background: #e6ca31;
     min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }

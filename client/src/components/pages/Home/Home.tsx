@@ -11,10 +11,11 @@ const Home: React.FC = () : JSX.Element => {
 
   if(user) console.log(user.name)
 
+  //isUserLoginedIn
+
   return (
     <div className={styles.root}>
-      <h1>Home Page</h1>
-      <MenuButton nav={'game'}>Start Game</MenuButton>
+      <MenuButton nav={'game'}>New Game</MenuButton>
       <MenuButton nav={'scores'}>Scores</MenuButton>
       <MenuButton nav={'instruction'}>Instruction</MenuButton>
       {!user ?<MenuButton nav={'signup'}>Sign up</MenuButton> : null }
