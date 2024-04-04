@@ -1,3 +1,4 @@
+@import '../../../styles/settings.scss';
 
 .button {
     border: 1px solid red;
@@ -5,4 +6,7 @@
     height: 100px;
     margin: 10px 0;
     font-size: 22px;
+    font-family: $font-text1;
+    font-weight: 700;
+    font-style: normal;
 }
