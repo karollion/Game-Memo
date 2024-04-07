@@ -20,7 +20,7 @@ exports.addScoreOnServer = (0, toolkit_1.createAsyncThunk)('scores/addScoreOnSer
             },
             body: JSON.stringify(scoreData),
         });
-        if (response.status === 200) {
+        if (response.status === 201) {
             console.log('Success add score');
         }
         else {
