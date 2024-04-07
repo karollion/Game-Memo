@@ -12,7 +12,7 @@ const OneScore: React.FC<OneScoreProps> = ({ data }) : JSX.Element => {
     <div className={styles.root} >
       <div>
         <img src="data.user.avatar" alt="avatar" className={styles.img}/>
-        {data.user.name}
+        {data.user && data.user.name}
       </div>
       <div>{data.cards}</div>
       <div>{String(data.winAt)}</div>

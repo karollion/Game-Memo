@@ -1,26 +1,44 @@
 import styles from './Game.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { resNumberOfClicks } from '../../../redux/gameRedux';
+import { resNumberOfClicks, selectNumberOfClicks } from '../../../redux/gameRedux';
 
 // import components
 import Board from '../../features/Board/Board';
 import Container from '../../common/Container/Container';
 import Victory from '../../features/Victory/Victory';
 import StopWatch from '../../features/StopWatch/StopWatch';
+
+// import from redux
 import { useDispatch } from 'react-redux';
+import { addScoreOnServer } from '../../../redux/scoreRedux';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/userRedux';
+import { Score } from '../../../redux/scoreRedux';
 
 const Game: React.FC = () : JSX.Element => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
+  const user = useSelector(selectUser);
   const [finish, setFinish] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
-
-  const finishGame = (): void => {
+  const moves = useSelector(selectNumberOfClicks);
+  
+  const finishGame = ( cards: number ): void => {
     setFinish(true);
     stopStopWatch();
+    if(user) {
+      const scoreData: Score = {
+        points: 100,
+        cards: cards,
+        moves: moves,
+        time: time,
+        userId: user.id,
+      };
+      dispatch(addScoreOnServer(scoreData) as any);
+    }
   };
   
   const quitGame = (): void => {
@@ -63,7 +81,7 @@ const Game: React.FC = () : JSX.Element => {
           startStopWatch={startStopWatch} 
         />
       </Container>
-      {finish && <Victory action={quitGame} time={time}/>}
+      {finish && <Victory action={quitGame} time={time} moves={moves} />}
     </div>
   );
 };

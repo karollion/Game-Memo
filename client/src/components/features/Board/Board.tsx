@@ -11,7 +11,7 @@ import GameCard from '../GameCard/GameCard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 interface BoardProps {
-    finishGame: () => void;
+    finishGame: ( cards: number) => void;
     startStopWatch: () => void;
 }
 
@@ -58,8 +58,8 @@ const Board: React.FC<BoardProps> = ({ finishGame, startStopWatch }) : JSX.Eleme
       }
     } 
     
-    if (guessedCards.length === 16) {
-      finishGame();
+    if (guessedCards.length === cards.length) {
+      finishGame(cards.length);
     }
   }
   

@@ -4,13 +4,13 @@ import { API_URL } from '../config';
 import { User } from './userRedux';
 
 export interface Score {
-  id: string;
+  id?: string;
   points: number;
   cards: number;
   moves: number;
   time: number;
-  winAt: Date;
-  user: User;
+  winAt?: Date;
+  user?: User;
   userId: string;
 }
 
@@ -32,6 +32,41 @@ export const fetchScores = createAsyncThunk(
   }
 );
 
+/**
+ * Adds user score to the server.
+ * @param score Obiect contain: 
+                points: number;
+                cards: number;
+                moves: number;
+                time: number;
+                userId: string;
+  @returns
+ */
+
+  export const addScoreOnServer = createAsyncThunk(
+    'scores/addScoreOnServer',
+    async (scoreData: Score, { dispatch }) => {
+      try {
+        const response = await fetch(`${API_URL}/scores`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(scoreData),
+        });
+  
+        if (response.status === 200) {
+          console.log('Success add score')
+          //dispatch(showSuccessBar());
+        } else {
+          console.log('Something wrong')
+        }
+      } catch (error) {
+        console.error('Error while adding score:', error);
+      }
+    }
+  );
+
 const scoresSlice = createSlice({
   name: 'AllScores',
   initialState,
@@ -45,6 +80,15 @@ const scoresSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchScores.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(addScoreOnServer.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addScoreOnServer.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(addScoreOnServer.rejected, (state) => {
       state.isLoading = false;
     });
   },

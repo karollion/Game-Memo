@@ -1,21 +1,19 @@
 import convertMsToTime from '../../../utils/convertMsToTime';
 import styles from './Victory.module.scss';
 import React from 'react';
-import { selectNumberOfClicks } from '../../../redux/gameRedux';
-import { useSelector } from 'react-redux';
 
 interface VictoryProps {
   action: () => void;
   time: number;
+  moves: number;
 }
-const Victory: React.FC<VictoryProps> = ({ action, time }) : JSX.Element => {
-  const numberOfClick = useSelector(selectNumberOfClicks);
+const Victory: React.FC<VictoryProps> = ({ action, time, moves }) : JSX.Element => {
 
   return (
     <div className={styles.root}>
       Victory
       <p>Your time: {convertMsToTime(time)}</p>
-      <p>You made {numberOfClick} moves</p>
+      <p>You made {moves} moves</p>
       <button type='button' onClick={action} >Back to Menu</button>
     </div>
   );

@@ -42,8 +42,8 @@ const Board = ({ finishGame, startStopWatch }) => {
                 setSecondCard(undefined);
             }
         }
-        if (guessedCards.length === 16) {
-            finishGame();
+        if (guessedCards.length === cards.length) {
+            finishGame(cards.length);
         }
     };
     (0, react_1.useEffect)(() => {
