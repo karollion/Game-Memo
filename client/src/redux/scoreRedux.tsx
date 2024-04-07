@@ -55,7 +55,7 @@ export const fetchScores = createAsyncThunk(
           body: JSON.stringify(scoreData),
         });
   
-        if (response.status === 200) {
+        if (response.status === 201) {
           console.log('Success add score')
           //dispatch(showSuccessBar());
         } else {

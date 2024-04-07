@@ -9,10 +9,6 @@ import { selectUser } from '../../../redux/userRedux';
 const Home: React.FC = () : JSX.Element => { 
   const user = useSelector(selectUser);
 
-  if(user) console.log(user.name)
-
-  //isUserLoginedIn
-
   return (
     <div className={styles.root}>
       <MenuButton nav={'game'}>New Game</MenuButton>
